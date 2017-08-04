@@ -1,0 +1,11 @@
+﻿{
+  "Triggers": {
+    "Coins": [
+      {
+        "Interval": "300000",
+        "Threshold": "200",
+        "Currency": "eth"
+      }
+    ]
+  }
+}
