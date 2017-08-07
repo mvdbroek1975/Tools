@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Net;
 using System.Text;
-using CurrencyPriceChecker.Exceptions;
+using CurrencyPriceChecker.Contracts;
 using CurrencyPriceChecker.Models;
 
 namespace CurrencyPriceChecker.Helpers
@@ -46,62 +43,6 @@ namespace CurrencyPriceChecker.Helpers
             Console.WriteLine(message);
 
             return currentPrice;
-        }
-    }
-
-    public interface IApiData<out T>
-    {
-        T GetData(string currency);
-    }
-
-    public class NexUistApiData : IApiData<RootObject>
-    {
-        private readonly IMessagePusher _messagePusher;
-        private const string EtheuriumUri = "https://coinmarketcap-nexuist.rhcloud.com/api/{0}";
-
-
-        public NexUistApiData(IMessagePusher messagePusher)
-        {
-            _messagePusher = messagePusher;
-        }
-
-        public RootObject GetData(string currency)
-        {
-            var uri = string.Format(EtheuriumUri, currency);
-            var json = new WebClient().DownloadString(uri);
-            if (string.IsNullOrWhiteSpace(json))
-                throw new EutheriumException(_messagePusher, $"{uri} is unreachable!");
-
-            var data = Newtonsoft.Json.JsonConvert.DeserializeObject<RootObject>(json);
-            if (data == null)
-                throw new EutheriumException(_messagePusher, "Couldn't deserialize market data");
-
-            return data;
-        }
-    }
-
-
-    public class CoinMarketCapApiData : IApiData<List<CoinMarketCapData>>
-    {
-        private readonly IMessagePusher _messagePusher;
-        private const string EtheuriumUri = "https://api.coinmarketcap.com/v1/ticker/?convert=EUR";
-
-        public CoinMarketCapApiData(IMessagePusher messagePusher)
-        {
-            _messagePusher = messagePusher;
-        }
-
-        public List<CoinMarketCapData> GetData(string currency)
-        {
-            var json = new WebClient().DownloadString(EtheuriumUri);
-            if (string.IsNullOrWhiteSpace(json))
-                throw new EutheriumException(_messagePusher, $"{EtheuriumUri} is unreachable!");
-
-            var data = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CoinMarketCapData>>(json);
-            if (data == null)
-                throw new EutheriumException(_messagePusher, "Couldn't deserialize market data");
-
-            return data;
         }
     }
 }

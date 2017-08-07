@@ -1,4 +1,3 @@
-using CurrencyPriceChecker.Helpers;
 
 namespace CurrencyPriceChecker.Models
 {

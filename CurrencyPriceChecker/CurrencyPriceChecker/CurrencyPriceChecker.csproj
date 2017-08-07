@@ -55,8 +55,12 @@
   <ItemGroup>
     <Compile Include="Helpers\AppSettings.cs" />
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Exceptions\EutheriumException.cs" />
+    <Compile Include="Exceptions\CryptoCurrencyException.cs" />
+    <Compile Include="Contracts\IApiData.cs" />
+    <Compile Include="Helpers\CoinMarketCapApiData.cs" />
+    <Compile Include="Helpers\NexUistApiData.cs" />
     <Compile Include="Models\Coin.cs" />
+    <Compile Include="Models\CoinMarketCapData.cs" />
     <Compile Include="Models\Triggers.cs" />
     <Compile Include="Models\TriggersRootObject.cs" />
     <Compile Include="Models\MarketCap.cs" />

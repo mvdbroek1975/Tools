@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using CurrencyPriceChecker.Contracts;
 using CurrencyPriceChecker.Helpers;
 using CurrencyPriceChecker.Models;
 using SimpleInjector;
